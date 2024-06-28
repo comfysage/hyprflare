@@ -6,7 +6,7 @@
   coreutils,
   libnotify,
   cliphist,
-  rofi,
+  rofi-wayland,
 }: let
   name = "quickhist";
 in
@@ -32,7 +32,7 @@ in
         coreutils
         libnotify
         cliphist
-        rofi
+        rofi-wayland
       ]}"
     '';
 

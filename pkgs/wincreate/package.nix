@@ -6,7 +6,7 @@
   coreutils,
   libnotify,
   tmux,
-  rofi,
+  rofi-wayland,
 }: let
   name = "wincreate";
 in
@@ -32,7 +32,7 @@ in
         coreutils
         libnotify
         tmux
-        rofi
+        rofi-wayland
       ]}"
     '';
 

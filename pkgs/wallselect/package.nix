@@ -5,7 +5,7 @@
   scdoc,
   coreutils,
   libnotify,
-  rofi,
+  rofi-wayland,
 }: let
   name = "wallselect";
 in
@@ -30,7 +30,7 @@ in
         "${lib.makeBinPath [
         coreutils
         libnotify
-        rofi
+        rofi-wayland
       ]}"
     '';
 
