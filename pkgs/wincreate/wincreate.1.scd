@@ -2,21 +2,21 @@ wincreate(1)
 
 # NAME
 
-wincreate - quick tmux session creator
+	wincreate - quick tmux session creator
 
 # SYNOPSIS
 
-*wincreate* open <name>
-*wincreate* list
+	*wincreate* open <name>
+	*wincreate* list
 
 # OPTIONS
 
-*open <name>*
-  open a tmux session by name
+	*open <name>*
+		open a tmux session by name
 
-*list*
-  interactively open a session with rofi
+	*list*
+		interactively open a session with rofi
 
 # DESCRIPTION
 
-quickly create predefined tmux sessions
+	quickly create predefined tmux sessions

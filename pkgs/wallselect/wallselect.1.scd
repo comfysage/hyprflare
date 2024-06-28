@@ -2,8 +2,8 @@ wallselect(1)
 
 # NAME
 
-wallselect - quick wallpaper selector
+	wallselect - quick wallpaper selector
 
 # SYNOPSIS
 
-*wallselect*
+	*wallselect*

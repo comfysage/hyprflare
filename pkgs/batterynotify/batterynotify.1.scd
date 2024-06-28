@@ -2,12 +2,12 @@ batterynotify(1)
 
 # NAME
 
-batterynotify - show battery message notifications
+	batterynotify - show battery message notifications
 
 # SYNOPSIS
 
-*batterynotify*
+	*batterynotify*
 
 # DESCRIPTION
 
-Get notifications when battery is low or the charger can be removed.
+	Get notifications when battery is low or the charger can be removed.

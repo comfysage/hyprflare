@@ -2,19 +2,19 @@ quickhist(1)
 
 # NAME
 
-quickhist - quick cliphist helper script
+	quickhist - quick cliphist helper script
 
 # SYNOPSIS
 
-*quickhist* (c|d|w|t)
-*quickhist* usage
+	*quickhist* (c|d|w|t)
+	*quickhist* usage
 
 # OPTIONS
 
-*usage*
-  Show help message.
+	*usage*
+		Show help message.
 
 # DESCRIPTION
 
-quick cliphist helper scripts to manage clipboard history - designed to be used
-as a waybar module.
+	quick cliphist helper scripts to manage clipboard history - designed to be used
+	as a waybar module.

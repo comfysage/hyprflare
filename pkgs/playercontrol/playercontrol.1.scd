@@ -2,7 +2,7 @@ playercontrol(1)
 
 # NAME
 
-playercontrol - playerctl helper script
+	playercontrol - playerctl helper script
 
 # SYNOPSIS
 
@@ -10,5 +10,5 @@ playercontrol - playerctl helper script
 
 # OPTIONS
 
-*-h --help*
-  Show help message.
+	*-h --help*
+		Show help message.
