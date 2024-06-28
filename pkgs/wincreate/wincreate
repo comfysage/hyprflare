@@ -1,0 +1,82 @@
+#!/usr/bin/env bash
+
+TERMINAL="${TERMINAL:-kitty}"
+
+msg() {
+  printf "\033[32;1m%s\033[m %s\n" "$PROMPT" "$*"
+}
+
+warn() {
+  >&2 printf "\033[33;1m%s \033[mwarning: %s\n" "$PROMPT" "$*"
+}
+
+die() {
+  >&2 printf "\033[31;1m%s \033[merror: %s\n" "$PROMPT" "$*"
+  exit 1
+}
+
+spawn_term() {
+  nohup $TERMINAL -e zsh -c "$@" &
+}
+
+spawn() {
+  args="$@"
+  spawn_term "$args" || die "could not spawn terminal."
+}
+
+spawn_session() {
+  name="$1"
+  wd="$2"
+  [[ -d "$wd" ]] || die "working directory does not exist."
+  shift&&shift
+  spawn tmux new-session -s "$name" -c "$wd" $@ || die "could not spawn session."
+}
+
+attach_session() {
+  name="$1"
+  shift
+  spawn tmux attach-session -t "$name" $@ || die "could not attach to session."
+}
+
+add_window() {
+  tmux new-window -n "$1"
+}
+
+__open() {
+  flag=${1#-}
+  shift
+
+  item=$(cat ~/.config/wincreate.json | jq ".${flag}")
+  [[ "$item" == "null" ]] && die "session is not defined."
+  path=$(echo $item | jq ".path" | envsubst | tr -d '"')
+
+  cmd="${SHELL}"
+  _editor_b=$(echo $item | jq ".editor")
+  [[ $_editor_b == 'true' ]] && cmd="${EDITOR}"
+
+  spawn_session $flag "$path" "$cmd"
+}
+
+__list() {
+  r_override=''
+  r_config="$HOME/.config/rofi/select.rasi"
+  items=$(cat ~/.config/wincreate.json | jq 'keys' | head -n -1 | tail -n +2 | tr -d '"' | tr -d ',' | tr -d ' ')
+  item=$(echo "$items" | rofi -dmenu -p "󰆍  Tmux" -theme-str "${r_override}" -theme "${r_config}")
+
+  [[ -z "$item" ]] || __open "$item"
+}
+
+main() {
+  flag=${1#-}
+  shift
+
+  case $flag in
+    open)
+      attach_session $1 || __open $1
+      ;;
+    list) __list ;;
+    *) die "command does not exist." ;;
+  esac
+}
+
+main $@

@@ -1,0 +1,25 @@
+#!/usr/bin/env sh
+
+! command -v haikei &>/dev/null && {
+  notify-send -u critical -a "wallselect" "haikei needs to be installed"
+  exit 1
+}
+
+WALL="$(haikei current)"
+
+# set variables
+BaseDir=`dirname $(realpath $0)`
+WallDir=`dirname "$WALL"`
+[[ -d "$WallDir" ]] || WallDir="$HOME/.wallpapers"
+RofiConf="$BaseDir/../share/wallselect.rasi"
+
+# launch rofi menu
+ThemeSel=$( ls $WallDir | while read line
+do
+  echo -en "$line\x00icon\x1f$WallDir/$line\n"
+done | rofi -dmenu -config "$RofiConf")
+
+# apply theme
+if [ ! -z $ThemeSel ] ; then
+  haikei set "$WallDir/$ThemeSel"
+fi
